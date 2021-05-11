@@ -172,5 +172,3 @@
 (define ($Char.eql a$0 b$1) ($U16.eql a$0 b$1))
 (define Char.eql (lambda (a$0) (lambda (b$1) ($Char.eql a$0 b$1))))
 (define ($Test.Prefix prefix$0 text$1) (let ((self0 prefix$0)) (case (= (string-length self0) 0) (#t (let () (let ((self0 text$1)) (case (= (string-length self0) 0) (#t (let () Bool.true)) (#f (let ((f0 (char->integer (string-ref self0 0)))(f1 (let ((_str_ self0)) (substring _str_ 1 (string-length _str_))))) Bool.true)))))) (#f (let ((f0 (char->integer (string-ref self0 0)))(f1 (let ((_str_ self0)) (substring _str_ 1 (string-length _str_))))) (let ((self2 text$1)) (case (= (string-length self2) 0) (#t (let () Bool.false)) (#f (let ((f2 (char->integer (string-ref self2 0)))(f3 (let ((_str_ self2)) (substring _str_ 1 (string-length _str_))))) ($Bool.and ($Char.eql f0 f2) ($Test.Prefix f1 f3)))))))))))
-(define Test.Prefix (lambda (prefix$0) (lambda (text$1) ($Test.Prefix prefix$0 text$1))))
-(run_io Test.Prefix)
