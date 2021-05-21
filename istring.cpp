@@ -10,8 +10,8 @@ iptr string_test(uptr obj);
 
 // string -> istring
 uptr str_to_istr(uptr str);
-// free istring #TODO
-uptr free_istr(uptr istr);
+// free istring
+void free_istr(uptr istr);
 // istring -> string #TODO
 uptr istr_to_str(uptr istr);
 // istring -> Char #TODO
@@ -50,4 +50,9 @@ uptr str_to_istr(uptr str) {
     *ret = std::move(*ret).push_back(c);
   }
   return (uptr)ret;
+}
+
+// free istring
+void free_istr(uptr istr) {
+  delete (istring_t*)istr;
 }
