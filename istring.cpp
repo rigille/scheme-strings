@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <iostream>
 #include "scheme.h"
 #include <immer/flex_vector.hpp>
 
