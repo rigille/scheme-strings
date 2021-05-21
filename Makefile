@@ -1,6 +1,6 @@
 CC=clang
 CXX=c++
-CFLAGS=-Wall -O3
+CFLAGS=-g -Wall -O3
 BINS=libistring.so
 
 all: $(BINS)
