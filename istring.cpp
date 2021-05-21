@@ -10,7 +10,7 @@ int64_t foreign_double(int64_t n);
 iptr string_test(uptr obj);
 
 // string -> istring
-uptr str_to_istr(uptr str);
+uptr str_to_istr(ptr str);
 // free istring
 void free_istr(uptr istr);
 // istring -> string #TODO
@@ -42,14 +42,16 @@ iptr string_test(ptr obj) {
 }
 
 // string -> istring
-uptr str_to_istr(uptr str) {
+uptr str_to_istr(ptr str) {
   // i think this is dumb, but let's see
   auto size = Sstring_length(str);
-  istring_t* ret = new istring_t;
+  istring_t tmp;
   for(auto i = 0; i < size; i++) {
-    const auto c = Sstring_ref(str, i);
-    *ret = std::move(*ret).push_back(c);
+    //const auto c = Sstring_ref(str, i);
+    tmp = tmp.push_back('c');
   }
+  istring_t *ret = new istring_t;
+  *ret = tmp;
   return (uptr)ret;
 }
 
