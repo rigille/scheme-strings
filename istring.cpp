@@ -8,10 +8,16 @@ extern "C" {
 int64_t foreign_double(int64_t n);
 iptr string_test(uptr obj);
 
-// istring -> Char
-string_char istring_head(uptr istr);
+// string -> istring #TODO
+uptr str_to_istr(uptr istr);
+// free istring #TODO
+uptr free_istr(uptr istr);
+// istring -> string #TODO
+uptr istr_to_str(uptr istr);
+// istring -> Char #TODO
+string_char istr_head(uptr istr);
 // istring -> istring #TODO
-uptr istring_tail(uptr istr);
+uptr istr_tail(uptr istr);
 // istring -> Bool #TODO
 uptr istring_eql(uptr istr);
 // (istring, istring) -> istring #TODO
@@ -21,7 +27,7 @@ uptr str_istr_concat(uptr fst, uptr snd);
 // (istring, string) -> istring #TODO
 uptr istr_str_concat(uptr fst, uptr snd);
 // (string, string) -> istring #TODO
-uptr istr_str_concat(uptr fst, uptr snd);
+uptr str_str_concat(uptr fst, uptr snd);
 
 }
 
