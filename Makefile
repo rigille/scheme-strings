@@ -6,7 +6,7 @@ BINS=libistring.so
 all: $(BINS)
 
 libistring.so: istring.cpp
-	$(CXX) $(CFLAGS) -fPIC -shared -o $@ istring.cpp -lc
+	$(CXX) $(CFLAGS) -fPIC -shared -o $@ istring.cpp
 
 clean:
 	rm *.so

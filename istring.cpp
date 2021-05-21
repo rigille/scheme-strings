@@ -7,7 +7,7 @@ extern "C" {
 
 // tests
 int64_t foreign_double(int64_t n);
-iptr string_test(uptr obj);
+int64_t string_test(ptr obj);
 
 // string -> istring
 uptr str_to_istr(ptr str);
@@ -37,8 +37,9 @@ typedef immer::flex_vector<char> istring_t;
 int64_t foreign_double(int64_t n) {
   return 2*n;
 }
+
 iptr string_test(ptr obj) {
-  return Sstring_length(obj);
+  return (int64_t)Sstring_length(obj);
 }
 
 // string -> istring
