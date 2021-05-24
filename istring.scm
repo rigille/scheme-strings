@@ -2,8 +2,16 @@
 
 ; immutable string type
 (define-record istring
-  ((immutable uptr ptr)))
+  ((immutable uptr ptr))
+  ()
+  ((constructor wrap-istring)))
 (define istring-guardian (make-guardian))
+; istring constructors that registers pointer in guardian
+(define make-istring
+  (lambda (x)
+    (let ((ret (wrap-istring x)))
+      (istring-guardian ret)
+      ret)))
 
 ; foreign-procedures
 (define str_to_istr (foreign-procedure "str_to_istr" (ptr) uptr))
@@ -15,9 +23,7 @@
 (define string->istring
   (lambda (x)
     ; TODO check x is really a string?
-    (let ((ret (make-istring (str_to_istr x))))
-      (istring-guardian ret)
-      ret)))
+    (make-istring (str_to_istr x))))
 
 (collect-request-handler
   (lambda ()
@@ -27,6 +33,6 @@
     (let f ()
       (let ([x (istring-guardian)])
         (when x
-          (display "freeing istring!")
+          (display "freeing istring!\n")
           (free-istring (istring-ptr x))
           (f))))))
