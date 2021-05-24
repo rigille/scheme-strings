@@ -12,9 +12,9 @@ int64_t string_test(ptr obj);
 // string -> istring
 uptr str_to_istr(ptr str);
 // free istring
-void free_istr(uptr istr);
+void free_istr(uptr raw_istr);
 // istring -> string #TODO
-uptr istr_to_str(uptr istr);
+ptr istr_to_str(uptr raw_istr);
 // istring -> Char #TODO
 string_char istr_head(uptr istr);
 // istring -> istring #TODO
@@ -60,6 +60,17 @@ uptr str_to_istr(ptr str) {
 }
 
 // free istring
-void free_istr(uptr istr) {
-  delete (istring_t*)istr;
+void free_istr(uptr raw_istr) {
+  delete (istring_t*)raw_istr;
+}
+
+ptr istr_to_str(uptr raw_istr) {
+  auto istr = (istring_t*)raw_istr;
+  auto ret = Smake_uninitialized_string(istr->size());
+  int i = 0;
+  for (const auto c : *istr) {
+    Sstring_set(ret, i, c);
+    i++;
+  }
+  return ret;
 }
