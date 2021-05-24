@@ -45,11 +45,14 @@ iptr string_test(ptr obj) {
 // string -> istring
 uptr str_to_istr(ptr str) {
   // i think this is dumb, but let's see
+  // it works for now, but initializing with
+  // iterators would be better as it would
+  // allocate less memory
   auto size = Sstring_length(str);
   istring_t tmp;
   for(auto i = 0; i < size; i++) {
-    //const auto c = Sstring_ref(str, i);
-    tmp = tmp.push_back('c');
+    const auto c = Sstring_ref(str, i);
+    tmp = tmp.push_back(c);
   }
   istring_t *ret = new istring_t;
   *ret = tmp;
