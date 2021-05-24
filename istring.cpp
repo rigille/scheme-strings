@@ -13,16 +13,18 @@ int64_t string_test(ptr obj);
 uptr str_to_istr(ptr str);
 // free istring
 void free_istr(uptr raw_istr);
-// istring -> string #TODO
+// istring -> string
 ptr istr_to_str(uptr raw_istr);
-// istring -> Char #TODO
-string_char istr_head(uptr istr);
-// istring -> istring #TODO
-uptr istr_tail(uptr istr);
-// istring -> Bool #TODO
-uptr istring_eql(uptr istr);
-// (istring, istring) -> istring #TODO
-uptr istring_concat(uptr fst, uptr snd);
+// istring -> Char
+ptr istr_head(uptr raw_istr);
+// istring -> istring
+uptr istr_tail(uptr raw_istr);
+// istring -> size
+ptr istr_length(uptr raw_istr);
+// istring -> Bool
+ptr istr_eql(uptr raw_fst, uptr raw_snd);
+// (istring, istring) -> istring
+uptr istr_concat(uptr raw_fst, uptr raw_snd);
 // (string, istring) -> istring #TODO
 uptr str_istr_concat(uptr fst, uptr snd);
 // (istring, string) -> istring #TODO
@@ -73,4 +75,35 @@ ptr istr_to_str(uptr raw_istr) {
     i++;
   }
   return ret;
+}
+
+ptr istr_head(uptr raw_istr) {
+  auto istr = (istring_t*)raw_istr;
+  return Schar(istr->front());
+}
+
+uptr istr_tail(uptr raw_istr) {
+  auto istr = (istring_t*)raw_istr;
+  istring_t *ret = new istring_t;
+  *ret = istr->drop(1);
+  return (uptr)ret;
+}
+
+ptr istr_length(uptr raw_istr) {
+  auto istr = (istring_t*)raw_istr;
+  return Sunsigned(istr->size());
+}
+
+ptr istr_eql(uptr raw_fst, uptr raw_snd) {
+  auto fst = (istring_t*)raw_fst;
+  auto snd = (istring_t*)raw_snd;
+  return Sboolean(*snd == *fst);
+}
+
+uptr istr_concat(uptr raw_fst, uptr raw_snd) {
+  auto fst = (istring_t*)raw_fst;
+  auto snd = (istring_t*)raw_snd;
+  istring_t *ret = new istring_t;
+  *ret = (*fst) + (*snd);
+  return (uptr)ret;
 }
